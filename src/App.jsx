@@ -33,6 +33,59 @@ function ScoreRing({ score }) {
   return <div className="score-ring"><svg viewBox="0 0 112 112" aria-label={`Signal score ${score} out of 100`}><circle className="ring-base" cx="56" cy="56" r={radius}/><circle className="ring-value" cx="56" cy="56" r={radius} strokeDasharray={circumference} strokeDashoffset={offset}/></svg><div className="ring-label"><strong>{score}</strong><span>/ 100</span></div></div>
 }
 
+const infoPages = {
+  '/about': {
+    eyebrow: 'ABOUT SITESIGNAL', title: <>A clearer view<br/><em>of your website.</em></>,
+    intro: 'SiteSignal is a small, practical audit tool for people who want to make their website easier to understand and use.',
+    sections: [
+      ['What we do', 'The free scan reads the public HTML of one homepage and checks a focused set of signals, including the main heading, contact and action paths, mobile viewport, search description, response, and a small sample of internal links.'],
+      ['What the report means', 'Each observation is tied to what the scanner could see in the returned page. Some sites render content in JavaScript or treat automated requests differently, so results are directional and should be checked in a normal browser. A score is not a sales forecast.'],
+      ['Human-reviewed fix plan', 'For €29 once, you can request a manual review of your homepage and up to three key pages. It includes a mobile and contact-path review and five prioritized fixes with evidence, delivered by email within two business days after we receive the site address and payment.']
+    ]
+  },
+  '/contact': {
+    eyebrow: 'CONTACT', title: <>Questions are<br/><em>welcome.</em></>,
+    intro: 'Ask about a scan, the manual fix plan, or a privacy request. Email is the direct way to reach SiteSignal.',
+    sections: [['Email', 'Write to jusspound@gmail.com. For a purchased review, include the website address and the email used at checkout so we can find your request. Please do not send passwords or private account access.'], ['Response times', 'We aim to reply within two business days. The paid fix plan is delivered within two business days after payment and the website address are both received.']],
+    email: true
+  },
+  '/privacy': {
+    eyebrow: 'PRIVACY POLICY · LAST UPDATED 3 OCTOBER 2026', title: <>Your data,<br/><em>explained plainly.</em></>,
+    intro: 'This draft describes the current SiteSignal website and service. The operator identity and postal address below must be completed before this is a complete legal notice.',
+    sections: [
+      ['Who operates SiteSignal', 'Operator: [LEGAL NAME / BUSINESS NAME], [POSTAL BUSINESS ADDRESS]. Contact: jusspound@gmail.com. Replace the bracketed details with the responsible operator’s real information.'],
+      ['Free scans', 'When you submit a public homepage address, the browser sends that address to our scan service hosted on Cloudflare. The service requests the public page and a limited sample of its internal links to create the report. The current app does not require an account and does not save scan reports in an application database. Cloudflare processes network requests and may keep technical logs under its own service terms and retention practices.'],
+      ['Paid fix plan', 'Checkout is provided by Stripe. Stripe collects and processes payment and checkout information under its own privacy terms. We receive the information needed to identify the purchase and fulfill the review, such as your email and the website address you provide. We use it to deliver the service, answer support requests, and meet applicable accounting and legal duties. Contact us to ask about access or deletion; legal retention requirements may apply.'],
+      ['External services and cookies', 'The site loads fonts from Google Fonts and uses Cloudflare Pages/Functions for hosting and scans. Checkout opens a Stripe Payment Link. These providers may process technical data such as IP address, browser details, and request metadata. The current app does not implement an advertising tracker or analytics cookie. Provider policies apply to their processing.'],
+      ['Your choices and questions', 'For privacy questions or requests, email jusspound@gmail.com. You may also have rights under the data-protection law that applies where you live, including rights to access, correct, or request deletion of personal data. You can contact your local data protection authority.'],
+      ['Provider information', 'Cloudflare privacy: https://www.cloudflare.com/privacypolicy/. Stripe privacy: https://stripe.com/privacy. Google privacy: https://policies.google.com/privacy.']
+    ]
+  },
+  '/terms': {
+    eyebrow: 'TERMS & CONDITIONS · LAST UPDATED 3 OCTOBER 2026', title: <>Clear terms<br/><em>for a useful tool.</em></>,
+    intro: 'These terms apply when you use SiteSignal or buy its manual website fix plan. The operator details need to be completed before publication.',
+    sections: [
+      ['Operator and contact', 'SiteSignal is operated by [LEGAL NAME / BUSINESS NAME], [POSTAL BUSINESS ADDRESS]. Contact: jusspound@gmail.com. Replace the bracketed details with the operator’s real information.'],
+      ['Free scanner', 'You may submit a publicly accessible homepage address that you are authorized to request. The scanner provides an automated technical snapshot of returned HTML and a small sample of links. It may miss browser-rendered content, and lightweight requests may differ from normal visitor behavior. You are responsible for checking the findings before acting on them.'],
+      ['Paid SiteSignal Fix Plan', 'The fix plan costs €29 as a one-time payment. It covers a manual review of one homepage and up to three key pages, a mobile and contact-path review, and five prioritized fixes with evidence. We send it by email within two business days after payment and receipt of the site address. If information is missing or the site cannot be accessed, we will contact you to resolve that.'],
+      ['No promised business result', 'The service offers observations and recommendations. It does not guarantee higher traffic, sales, revenue, search rankings, or a particular business outcome. You decide whether and how to apply suggestions.'],
+      ['Payments and consumer rights', 'Payments are processed by Stripe. Any cancellation, withdrawal, refund, or other consumer rights that apply under mandatory law remain in effect. Nothing in these terms removes those rights. If you have a question about an order, contact jusspound@gmail.com.'],
+      ['Acceptable use', 'Do not use the scanner to probe private, restricted, or unauthorized systems, or to disrupt a website. Use it only for public pages and at a reasonable rate. We may limit access where necessary to protect the service or others.'],
+      ['Updates', 'We may update these terms as the service changes. The date above shows when this page was last revised. Questions can be sent to jusspound@gmail.com.']
+    ]
+  },
+  '/imprint': {
+    eyebrow: 'LEGAL NOTICE', title: <>SiteSignal<br/><em>operator details.</em></>,
+    intro: 'Complete the marked fields with the real responsible person or business and a postal address before relying on this commercial website’s legal notice.',
+    sections: [['Responsible operator', '[LEGAL NAME / BUSINESS NAME]'], ['Postal address', '[STREET, POSTAL CODE, CITY, COUNTRY]'], ['Email', 'jusspound@gmail.com'], ['Responsible for content', '[LEGAL NAME / BUSINESS NAME], [POSTAL BUSINESS ADDRESS]']],
+    note: 'Action required: replace every bracketed placeholder with accurate operator details.'
+  }
+}
+
+function InfoPage({ page }) {
+  return <div className="site-shell info-shell"><header className="top-nav"><a className="wordmark" href="/" aria-label="SiteSignal home"><span className="mark"><i/><i/><i/><i/></span><span>site<span>signal</span></span></a><nav><a href="/">Free scan</a><a href="/#deep-dive" className="nav-cta">€29 Fix plan ↗</a></nav></header><main className="info-main"><a className="back-link" href="/">← Back to SiteSignal</a><div className="eyebrow"><span className="eyebrow-line"/> {page.eyebrow}</div><h1>{page.title}</h1><p className="info-intro">{page.intro}</p>{page.note && <p className="info-note">{page.note}</p>}<div className="info-content">{page.sections.map(([title, body]) => <section key={title}><h2>{title}</h2><p>{body}</p></section>)}</div>{page.email && <a className="info-email" href="mailto:jusspound@gmail.com?subject=SiteSignal%20question">Email jusspound@gmail.com ↗</a>}</main><footer className="footer info-footer"><a className="wordmark" href="/"><span className="mark"><i/><i/><i/><i/></span><span>site<span>signal</span></span></a><div className="footer-links"><a href="/about">About</a><a href="/contact">Contact</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/imprint">Imprint</a></div><span className="footer-right">© {new Date().getFullYear()} SITESIGNAL</span></footer></div>
+}
+
 export default function App() {
   const [url, setUrl] = useState('')
   const [report, setReport] = useState(demo)
@@ -61,9 +114,11 @@ export default function App() {
   }
   const attention = report.checks.filter(c => c.status !== 'good').length
   const fixed = report.checks.filter(c => c.status === 'good').length
+  const route = window.location.pathname.replace(/\/+$/, '') || '/'
+  if (infoPages[route]) return <InfoPage page={infoPages[route]} />
 
   return <div className="site-shell">
-    <header className="top-nav"><a className="wordmark" href="#top" aria-label="SiteSignal home"><span className="mark"><i/><i/><i/><i/></span><span>site<span>signal</span></span></a><nav><a href="#how-it-works">How it works</a><a href="#report">Sample report</a><span className="nav-badge"><b/> FREE SITE SCAN</span></nav></header>
+    <header className="top-nav"><a className="wordmark" href="#top" aria-label="SiteSignal home"><span className="mark"><i/><i/><i/><i/></span><span>site<span>signal</span></span></a><nav><a href="#how-it-works">How it works</a><a href="#report">Sample report</a><a href="/about">About</a><a href="/contact">Contact</a><a href="#deep-dive" className="nav-cta">€29 Fix plan ↗</a></nav></header>
 
     <main id="top">
       <section className="hero-grid"><div className="hero-copy"><div className="eyebrow"><span className="eyebrow-line"/> WEBSITE REVENUE LEAK SCANNER <span className="eyebrow-index">01 / 03</span></div><h1>Find the friction<br/>between <em>visit</em><br/>and <em>yes.</em></h1><p className="hero-sub">A sharper look at the small things that make a customer hesitate. Scan a public homepage. Get a clear, evidence-backed fix list in seconds.</p><div className="hero-points"><span>{icons.check} No account needed</span><span>{icons.check} No revenue guesses</span><span>{icons.check} Your scan, your report</span></div>
@@ -80,11 +135,11 @@ export default function App() {
 
       <section className="how-section" id="how-it-works"><div className="how-heading"><div className="eyebrow"><span className="eyebrow-line"/> A CLEANER WAY TO LOOK <span className="eyebrow-index">03 / 03</span></div><h2>A useful audit.<br/><em>Without the theater.</em></h2><p>No mystery score, no invented sales math. Just a public-page check with evidence and suggested fixes.</p></div><div className="how-cards"><article><span className="how-num">01</span><div className="how-icon">⌕</div><h3>Read the public page</h3><p>We fetch the homepage you enter and inspect its response. No account, login, or analytics access.</p><span className="how-tag">ONE HOMEPAGE</span></article><article><span className="how-num">02</span><div className="how-icon">⌁</div><h3>Spot visible friction</h3><p>Check page clarity, contact paths, mobile setup, share previews, and a small sample of internal links.</p><span className="how-tag">EVIDENCE-LED</span></article><article><span className="how-num">03</span><div className="how-icon">↗</div><h3>Take a next step</h3><p>Export the findings as a tidy report. Decide what matters, verify it in a browser, and make the change.</p><span className="how-tag">YOURS TO KEEP</span></article></div></section>
 
-      <section className="deep-dive"><div className="deep-copy"><div className="eyebrow"><span className="eyebrow-line"/> WHEN YOU WANT A SECOND SET OF EYES</div><h2>Go from signals<br/>to a <em>clear plan.</em></h2><p>Get a human-reviewed fix plan for your site. Practical observations, prioritized for your actual customer journey.</p><div className="deep-deliverables"><span>{icons.check} Homepage + up to 3 key pages</span><span>{icons.check} Mobile and contact-path review</span><span>{icons.check} Five prioritized fixes with evidence</span><span>{icons.check} Delivered by email within 2 business days</span></div></div><div className="deep-offer"><div className="deep-offer-top"><span>SITESIGNAL FIX PLAN</span><span className="one-time">ONE-TIME</span></div><div className="deep-price">€29 <small>once</small></div><p>Manual website review. No subscription and no promised revenue outcome.</p>{deepDiveLink ? <a href={deepDiveLink} target="_blank" rel="noreferrer">Request my fix plan {icons.arrow}</a> : <button className="not-connected" disabled>Stripe link not connected</button>}<small>{deepDiveLink ? 'Secure payment through Stripe. We’ll use the site address and email from checkout.' : 'After you create the €29 Stripe Payment Link, set VITE_STRIPE_PAYMENT_LINK to activate checkout.'}</small></div></section>
+      <section className="deep-dive" id="deep-dive"><div className="deep-copy"><div className="eyebrow"><span className="eyebrow-line"/> WHEN YOU WANT A SECOND SET OF EYES</div><h2>Go from signals<br/>to a <em>clear plan.</em></h2><p>Get a human-reviewed fix plan for your site. Practical observations, prioritized for your actual customer journey.</p><div className="deep-deliverables"><span>{icons.check} Homepage + up to 3 key pages</span><span>{icons.check} Mobile and contact-path review</span><span>{icons.check} Five prioritized fixes with evidence</span><span>{icons.check} Delivered by email within 2 business days</span></div></div><div className="deep-offer"><div className="deep-offer-top"><span>SITESIGNAL FIX PLAN</span><span className="one-time">ONE-TIME</span></div><div className="deep-price">€29 <small>once</small></div><p>Manual website review. No subscription and no promised revenue outcome.</p>{deepDiveLink ? <a href={deepDiveLink} target="_blank" rel="noreferrer">Request my fix plan {icons.arrow}</a> : <button className="not-connected" disabled>Stripe link not connected</button>}<small>{deepDiveLink ? 'Secure payment through Stripe. We’ll use the site address and email from checkout.' : 'After you create the €29 Stripe Payment Link, set VITE_STRIPE_PAYMENT_LINK to activate checkout.'}</small></div></section>
 
       <section className="final-cta"><div className="cta-star">✳</div><div className="eyebrow"><span className="eyebrow-line"/> THE NEXT GOOD DECISION</div><h2>Every click deserves<br/>a <em>clear next step.</em></h2><button className="cta-button" onClick={() => { document.getElementById('site-url')?.focus(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>Scan a website <span>↗</span></button><p>Free homepage scan. No revenue promises. Just a sharper view.</p></section>
     </main>
 
-    <footer className="footer"><a className="wordmark" href="#top"><span className="mark"><i/><i/><i/><i/></span><span>site<span>signal</span></span></a><span className="footer-copy">Made for people who make the web work better.</span><div className="footer-right"><span>PUBLIC-PAGE AUDIT TOOL</span><span>© {new Date().getFullYear()} SITESIGNAL</span></div></footer>
+    <footer className="footer"><a className="wordmark" href="#top"><span className="mark"><i/><i/><i/><i/></span><span>site<span>signal</span></span></a><span className="footer-copy">Made for people who make the web work better.</span><div className="footer-links"><a href="/about">About</a><a href="/contact">Contact</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/imprint">Imprint</a></div><div className="footer-right"><span>PUBLIC-PAGE AUDIT TOOL</span><span>© {new Date().getFullYear()} SITESIGNAL</span></div></footer>
   </div>
 }

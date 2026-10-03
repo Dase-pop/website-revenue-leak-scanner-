@@ -3,4 +3,9 @@
   <url>
     <loc>https://website-revenue-leak-scanner.pages.dev/</loc>
   </url>
+  <url><loc>https://website-revenue-leak-scanner.pages.dev/about</loc></url>
+  <url><loc>https://website-revenue-leak-scanner.pages.dev/contact</loc></url>
+  <url><loc>https://website-revenue-leak-scanner.pages.dev/privacy</loc></url>
+  <url><loc>https://website-revenue-leak-scanner.pages.dev/terms</loc></url>
+  <url><loc>https://website-revenue-leak-scanner.pages.dev/imprint</loc></url>
 </urlset>
