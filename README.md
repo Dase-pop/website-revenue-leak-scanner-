@@ -23,6 +23,10 @@ Create a Cloudflare Pages project with this directory as its root, `npm run buil
 
 The scan endpoint only accepts public HTTP(S) pages, follows a limited number of redirects, caps the homepage response at 1.5 MB, and checks at most six same-origin links. It does not log or persist submitted URLs or fetched page content. Before broad public promotion, add Cloudflare rate limiting or a challenge to `/api/scan` to control automated use.
 
+## Search and launch
+
+The page has a descriptive title, search summary, canonical URL, share metadata, `robots.txt`, and a one-page `sitemap.xml`. Verify the domain in Google Search Console and submit the sitemap; crawling and indexing are not guaranteed. See `marketing/launch-kit.md` for transparent, community-friendly launch drafts and a first-week feedback loop.
+
 ## Paid manual review
 
 The optional offer is **SiteSignal Fix Plan — €29 one-time**. Deliver manually by email: review the homepage and up to three key pages, check the mobile contact or booking path, then provide five prioritized fixes with evidence within two business days. This app does not automatically fulfill the service.

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://website-revenue-leak-scanner.pages.dev/sitemap.xml
